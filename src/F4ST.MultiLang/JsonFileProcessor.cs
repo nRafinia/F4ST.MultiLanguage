@@ -13,10 +13,13 @@ namespace F4ST.MultiLang
     public class JsonFileProcessor : IJsonFileProcessor
     {
         private readonly List<ResourceModel> _resources = new List<ResourceModel>();
-        private readonly string _path;
+        private readonly List<string> _paths;
         internal JsonFileProcessor(string path)
         {
-            _path = path;
+            _paths = new List<string>()
+            {
+                path
+            };
             ProcessDirectory();
             _r = new LangBag(this);
         }
@@ -39,15 +42,15 @@ namespace F4ST.MultiLang
 
             var res = _resources.FirstOrDefault(r => r.Key == resource);
 
-            if(res?.Resources == null)
+            if (res?.Resources == null)
                 return string.Empty;
-            
+
             if (!res.Resources.ContainsKey(key))
                 return string.Empty;
 
             var item = res.Resources[key];
 
-            return !res.Cultures?.ContainsKey(culture)??true
+            return !res.Cultures?.ContainsKey(culture) ?? true
                 ? item.FirstOrDefault().Value
                 : item[culture];
         }
@@ -102,7 +105,14 @@ namespace F4ST.MultiLang
 
         public void Reload()
         {
+            _resources.Clear();
             ProcessDirectory();
+        }
+
+        public void AddResourceFolder(string path)
+        {
+            _paths.Add(path);
+            ProcessFiles(path);
         }
 
         #region Private methods
@@ -112,9 +122,12 @@ namespace F4ST.MultiLang
         /// </summary>
         private void ProcessDirectory()
         {
-            foreach (var path in ProcessDirectory(_path))
+            foreach (var pathItem in _paths)
             {
-                ProcessFiles(path);
+                foreach (var path in ProcessDirectory(pathItem))
+                {
+                    ProcessFiles(path);
+                }
             }
         }
 

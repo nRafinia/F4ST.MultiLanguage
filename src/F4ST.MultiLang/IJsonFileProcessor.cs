@@ -54,5 +54,11 @@ namespace F4ST.MultiLang
         /// Reload all resources
         /// </summary>
         void Reload();
+
+        /// <summary>
+        /// Adds the resource folder.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        void AddResourceFolder(string path);
     }
 }
