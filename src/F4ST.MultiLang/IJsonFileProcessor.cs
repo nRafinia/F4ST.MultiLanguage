@@ -60,5 +60,7 @@ namespace F4ST.MultiLang
         /// </summary>
         /// <param name="path">The path.</param>
         void AddResourceFolder(string path);
+
+        string GetDirection(string resource, string lang);
     }
 }

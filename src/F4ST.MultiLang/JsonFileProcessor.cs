@@ -112,7 +112,23 @@ namespace F4ST.MultiLang
         public void AddResourceFolder(string path)
         {
             _paths.Add(path);
-            ProcessFiles(path);
+            foreach (var item in ProcessDirectory(path))
+            {
+                ProcessFiles(item);
+            }
+        }
+
+        public string GetDirection(string resource, string lang)
+        {
+            resource = resource.ToLower();
+            var res = _resources.FirstOrDefault(r => r.Key == resource);
+
+            if (!res.Cultures.ContainsKey(lang))
+                return "ltr";
+
+            return res.Cultures[lang]
+                ? "rtl"
+                : "ltr";
         }
 
         #region Private methods
