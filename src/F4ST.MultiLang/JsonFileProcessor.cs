@@ -66,9 +66,14 @@ namespace F4ST.MultiLang
         public string GetResource(string key)
         {
             var r = key.Split('.');
-            return r.Length < 2
-                ? string.Empty
-                : GetResource(r[0], r[1]);
+
+            return r.Length switch
+            {
+                1 => string.Empty,
+                2 => GetResource(r[0], r[1]),
+                3 => GetResource(r[0], r[1], r[2]),
+                _ => string.Empty
+            };
         }
 
         /// <inheritdoc/>

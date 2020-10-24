@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Multi resouce file functionality for F4ST</Description>
     <Product>F4ST</Product>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <Authors>https://github.com/F4ST-Tools/</Authors>
     <Company>https://github.com/F4ST-Tools/</Company>
     <License>https://opensource.org/licenses/AGPL-3.0</License>
